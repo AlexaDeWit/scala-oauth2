@@ -7,12 +7,19 @@ import org.http4s._
 import org.http4s.util._
 import org.http4s.argonaut.jsonOf
 
-case class AccessToken( token: String,
-                        tokenType: String,
-                        expiresIn: Int, 
-                        refreshToken: Option[String] ) {
+case class AccessToken(
+  token: String,
+  tokenType: String,
+  expiresIn: Int, 
+  refreshToken: Option[String] ) {
 
 }
+
+
+object AccessToken {
+}
+
+
 
 object AccessTokenJson {
   implicit def accessTokenCodecJson : CodecJson[AccessToken] = {

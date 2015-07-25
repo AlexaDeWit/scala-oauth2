@@ -12,12 +12,12 @@ import org.http4s.Status.ResponseClass.Successful
 
 import AccessTokenJson._
 
-trait AccessTokenRequestBuilder[Provider] {
+trait AccessTokenRequestBuilder[P <: Provider] {
 
   def build(
     requestUri: Uri,
     authCode: String,
-    keys: OAuth2Keys,
+    keys: OAuth2Keys[P],
     host: String ) : Task[Request]
 
 }
@@ -36,15 +36,5 @@ object AccessTokenRequest {
     }
 
   }
-}
-
-object AccessTokenRequestUtils {
-
-  def base64EncodedKeys( keys: OAuth2Keys, delimiter: String = ":" ) : String = {
-    Base64.encodeBase64String (
-      s"${keys.clientId}${delimiter}${keys.secretKey}".getBytes()
-    )
-  }
-
 }
 
