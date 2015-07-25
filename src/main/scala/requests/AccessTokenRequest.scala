@@ -9,15 +9,20 @@ import org.http4s.util._
 
 trait AccessTokenRequest[Provider] {
 
-  def base64EncodedKeys( keys: OAuth2Keys, delimiter: String = ":" ) : String = {
-    Base64.encodeBase64String (
-      s"${keys.clientId}${delimiter}${keys.secretKey}".getBytes()
-    )
-  }
-
   def build(
     requestUri: Uri,
     authCode: String,
     keys: OAuth2Keys,
     host: String ) : Task[Request]
 }
+
+object AccessTokenRequestUtils {
+
+  def base64EncodedKeys( keys: OAuth2Keys, delimiter: String = ":" ) : String = {
+    Base64.encodeBase64String (
+      s"${keys.clientId}${delimiter}${keys.secretKey}".getBytes()
+    )
+  }
+
+}
+
