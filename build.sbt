@@ -4,10 +4,11 @@ val argonaut = "io.argonaut" %% "argonaut" % "6.1"
 val http4sDsl  = "org.http4s" %% "http4s-dsl" % "0.8.4"
 val http4sBlazeClient  = "org.http4s" %% "http4s-blazeclient" % "0.8.4"
 val http4sArgonaut = "org.http4s" %% "http4s-argonaut" % "0.8.4"
+val apacheCommons = "commons-codec" % "commons-codec" % "1.10"
 
 lazy val commonSettings =  Seq(
   version := "0.0.1",
-  scalaVersion := "2.11.6"
+  scalaVersion := "2.11.7"
 )
 lazy val root = (project in file(".")).
   settings( commonSettings: _* ).
@@ -16,10 +17,11 @@ lazy val root = (project in file(".")).
     libraryDependencies ++= Seq(
       scalatest,
       scalaz,
-      argonaut,
       http4sDsl,
       http4sBlazeClient,
-      http4sArgonaut
+      http4sArgonaut,
+      argonaut,
+      apacheCommons
     )
   )
 
