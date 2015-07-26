@@ -5,7 +5,7 @@ import argonaut._, Argonaut._, DecodeResult._
 class OAuth2KeysSpec extends FlatSpec {
 
  case class TestProvider(
-  host: Option[String],
+  host: String,
   tokenEndpoint: String,
   revokeEndpoint: String ) extends Provider(
     host,

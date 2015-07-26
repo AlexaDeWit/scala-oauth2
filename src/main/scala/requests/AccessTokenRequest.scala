@@ -1,6 +1,5 @@
 package com.github.alexadewit.scala_oauth2
 
-import org.apache.commons.codec.binary.Base64
 import scalaz._, scalaz.syntax.either._, scalaz.concurrent._
 
 import org.http4s._
