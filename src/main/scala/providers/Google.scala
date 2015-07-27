@@ -7,21 +7,13 @@ import org.http4s.client._
 import org.http4s.util._
 
 
-case class Googlelike(
-  host: String,
-  tokenEndpoint: String,
-  revokeEndpoint: String ) extends Provider(
-    host,
-    tokenEndpoint,
-    revokeEndpoint ) {
-  
-  /* I think it works like this...? Typeclasses!
-  implicit object requestBuilder extends AccessTokenRequestBuilder[Google] {
-  }
-  */
-}
+class Googlelike extends Provider
 
 object Googlelike {
+
+  /*
+  val google = Endpoints(foo)
+  */
   /*
   implicit val accessTokenRequestBuilder = new AccessTokenRequestBuilder[Googlelike] {
     def build(

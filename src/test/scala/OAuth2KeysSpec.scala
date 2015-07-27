@@ -4,14 +4,8 @@ import argonaut._, Argonaut._, DecodeResult._
 
 class OAuth2KeysSpec extends FlatSpec {
 
- case class TestProvider(
-  host: String,
-  tokenEndpoint: String,
-  revokeEndpoint: String ) extends Provider(
-    host,
-    tokenEndpoint,
-    revokeEndpoint )
 
+  class TestProvider extends Provider
   "base 64 encoded keys" should "correctly encode the result" in {
     val keys = OAuth2Keys[TestProvider](
       "3rdparty_clientid",
