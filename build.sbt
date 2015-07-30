@@ -1,6 +1,6 @@
 val scalaz = "org.scalaz" %% "scalaz-core" % "7.1.3"
 val scalatest = "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test"
-val argonaut = "io.argonaut" %% "argonaut" % "6.1"  
+val argonaut = "io.argonaut" %% "argonaut" % "6.1-M4" changing()
 val http4sDsl  = "org.http4s" %% "http4s-dsl" % "0.8.4"
 val http4sBlazeClient  = "org.http4s" %% "http4s-blazeclient" % "0.8.4"
 val http4sArgonaut = "org.http4s" %% "http4s-argonaut" % "0.8.4"
