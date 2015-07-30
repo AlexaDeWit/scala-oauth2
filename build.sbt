@@ -4,6 +4,7 @@ val argonaut = "io.argonaut" %% "argonaut" % "6.1-M4" changing()
 val http4sDsl  = "org.http4s" %% "http4s-dsl" % "0.8.4"
 val http4sBlazeClient  = "org.http4s" %% "http4s-blazeclient" % "0.8.4"
 val http4sArgonaut = "org.http4s" %% "http4s-argonaut" % "0.8.4"
+val scalazStream = "org.scalaz.stream" %% "scalaz-stream" % "0.7.2a"
 val apacheCommons = "commons-codec" % "commons-codec" % "1.10"
 
 lazy val commonSettings =  Seq(
@@ -20,6 +21,7 @@ lazy val root = (project in file(".")).
       http4sDsl,
       http4sBlazeClient,
       http4sArgonaut,
+      scalazStream,
       argonaut,
       apacheCommons
     )
