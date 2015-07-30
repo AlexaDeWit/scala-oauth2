@@ -7,7 +7,9 @@ import org.http4s.client._
 import org.http4s.util._
 
 
-class Googlelike extends Provider {
+trait Googlelike
+
+class GooglelikeFormat[P] extends ProviderFormat[Googlelike] {
 
   val accessTokenRequestBuilder = AccessTokenRequestBuilder[P] {
     def build(
@@ -44,7 +46,10 @@ class Googlelike extends Provider {
 
 }
 
+class Google extends Googlelike
 object Google {
+
+  implicit val providerFormat = new GooglelikeFormat[Google]
 
   implicit val googleEndpoints = Endpoints(
     "www.googleapis.com",
