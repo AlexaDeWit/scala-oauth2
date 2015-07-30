@@ -7,6 +7,8 @@ val http4sArgonaut = "org.http4s" %% "http4s-argonaut" % "0.8.4"
 val scalazStream = "org.scalaz.stream" %% "scalaz-stream" % "0.7.2a"
 val apacheCommons = "commons-codec" % "commons-codec" % "1.10"
 
+//resolvers += "Scalaz Bintray Repo" at "https://dl.bintray.com/scalaz/releases"
+
 lazy val commonSettings =  Seq(
   version := "0.0.1",
   scalaVersion := "2.11.7"
