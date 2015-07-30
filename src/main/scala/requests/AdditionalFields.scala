@@ -1,2 +1,9 @@
 package com.github.alexadewit.scala_oauth2
-trait AdditionalFields[P]
+
+import org.http4s.Headers
+
+trait AdditionalFields[P] {
+
+  def headerPart : Headers
+  def bodyPart : Map[String,Seq[String]]
+}

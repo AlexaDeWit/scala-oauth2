@@ -4,4 +4,11 @@ import com.github.alexadewit.scala_oauth2.AdditionalFields
 
 import org.http4s._, Http4s._
 
-case class GoogleFields( redirectUri: Uri ) extends AdditionalFields[Googlelike]
+case class GoogleFields( redirectUri: Uri ) extends AdditionalFields[Googlelike] {
+
+  def headerPart : Headers = Headers.empty
+  def bodyPart: Map[String, Seq[String]] = {
+    Map( "redirect_uri" -> Seq(redirectUri.toString) )
+  }
+}
+

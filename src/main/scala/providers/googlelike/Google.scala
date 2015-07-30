@@ -11,45 +11,45 @@ trait Googlelike
 
 class GooglelikeFormat[P] extends ProviderFormat[Googlelike] {
 
-  val accessTokenRequestBuilder = AccessTokenRequestBuilder[P] {
-    def build(
+  val accessTokenRequestBuilder = new AccessTokenRequestBuilder[P]{
+    override def build(
       requestUri: Uri,
       authCode: String,
       keys: OAuth2Keys[P],
       host: String,
-      additionalFields: GoogleFields ) : Task[Request] = {
+      additionalFields: AdditionalFields[P] ) : Task[Request] = {
       
       Request(
         Method.POST,
         requestUri,
         HttpVersion.`HTTP/1.1`
         ).withBody(
-          UrlForm( accessTokenRequestMap( authCode, keys, additionalFields ) )
+          UrlForm(
+            accessTokenRequestMap( authCode, keys ) ++ additionalFields.bodyPart
+          )
         )
     }
 
     def accessTokenRequestMap(
       authCode: String,
-      keys: OAuth2Keys[P],
-      additionalFields: GoogleFields
+      keys: OAuth2Keys[P]
       ) : Map[String,Seq[String]] = {
 
         Map(
           "code" -> Seq(authCode),
           "client_id" -> Seq(keys.clientId),
           "client_secret" -> Seq(keys.secretKey),
-          "redirect_uri" -> Seq(additionalFields.redirectUri.toString),
           "grant_type" -> Seq("authorization_code")
         )
     }
-  }
+  } 
 
 }
 
 class Google extends Googlelike
 object Google {
 
-  implicit val providerFormat = new GooglelikeFormat[Google]
+  val providerFormat = new GooglelikeFormat[Google]
 
   implicit val googleEndpoints = Endpoints(
     "www.googleapis.com",
