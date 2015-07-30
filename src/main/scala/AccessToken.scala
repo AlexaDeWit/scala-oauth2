@@ -19,7 +19,7 @@ case class AccessToken(
 object AccessToken {
 
   def from[P]( endpoints: Endpoints[P] )
-    ( authCode: String, keys: OAuth2Keys[P] )
+    ( authCode: String, keys: OAuth2Keys[P], additionalFields: AdditionalFields[P] )
     ( implicit requestBuilder: AccessTokenRequestBuilder[P] ) 
     : Task[String\/AccessToken] = {
 
@@ -27,7 +27,8 @@ object AccessToken {
       endpoints.accessTokenEndpoint,
       authCode,
       keys,
-      endpoints.host
+      endpoints.host,
+      additionalFields
     )
     AccessTokenRequest.accessToken( reqTask )
   }

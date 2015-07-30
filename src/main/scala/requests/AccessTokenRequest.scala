@@ -17,7 +17,8 @@ trait AccessTokenRequestBuilder[P] {
     requestUri: Uri,
     authCode: String,
     keys: OAuth2Keys[P],
-    host: String ) : Task[Request]
+    host: String,
+    additionalFields: AdditionalFields[P] ) : Task[Request]
 
 }
 
