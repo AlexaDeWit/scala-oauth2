@@ -7,7 +7,8 @@ import org.http4s.client._
 import org.http4s.util._
 
 
-class Googlelike extends Provider
+class Googlelike extends Provider {
+}
 
 object Googlelike {
 

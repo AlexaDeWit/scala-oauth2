@@ -11,7 +11,7 @@ import org.http4s.Status.ResponseClass.Successful
 
 import AccessTokenJson._
 
-trait AccessTokenRequestBuilder[P <: Provider] {
+trait AccessTokenRequestBuilder[P] {
 
   def build(
     requestUri: Uri,

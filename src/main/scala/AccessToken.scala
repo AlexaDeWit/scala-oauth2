@@ -18,7 +18,7 @@ case class AccessToken(
 
 object AccessToken {
 
-  def from[P <: Provider]( endpoints: Endpoints[P] )
+  def from[P]( endpoints: Endpoints[P] )
     ( authCode: String, keys: OAuth2Keys[P] )
     ( implicit requestBuilder: AccessTokenRequestBuilder[P] ) 
     : Task[String\/AccessToken] = {
