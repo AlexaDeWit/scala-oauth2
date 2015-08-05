@@ -7,15 +7,14 @@ import org.http4s.client._
 import org.http4s.util._
 
 
-trait Googlelike
 
-class GooglelikeFormat[P] extends ProviderFormat[Googlelike] {
+class GooglelikeFormat[P] extends ProviderFormat[GoogleCredentials] {
 
   val accessTokenRequestBuilder = new AccessTokenRequestBuilder[P]{
     override def build(
       requestUri: Uri,
       authCode: String,
-      keys: OAuth2Keys[P],
+      keys: OAuth2Keys,
       host: String,
       additionalFields: AdditionalFields[P] ) : Task[Request] = {
       
@@ -32,7 +31,7 @@ class GooglelikeFormat[P] extends ProviderFormat[Googlelike] {
 
     def accessTokenRequestMap(
       authCode: String,
-      keys: OAuth2Keys[P]
+      keys: OAuth2Keys
       ) : Map[String,Seq[String]] = {
 
         Map(
@@ -46,10 +45,9 @@ class GooglelikeFormat[P] extends ProviderFormat[Googlelike] {
 
 }
 
-class Google extends Googlelike
 object Google {
 
-  val providerFormat = new GooglelikeFormat[Google]
+  val providerFormat = new GooglelikeFormat[GoogleCredentials]
 
   implicit val googleEndpoints = Endpoints(
     "www.googleapis.com",

@@ -16,7 +16,7 @@ trait AccessTokenRequestBuilder[P] {
   def build(
     requestUri: Uri,
     authCode: String,
-    keys: OAuth2Keys[P],
+    keys: OAuth2Keys,
     host: String,
     additionalFields: AdditionalFields[P] ) : Task[Request]
 
