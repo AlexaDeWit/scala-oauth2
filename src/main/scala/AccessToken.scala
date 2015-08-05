@@ -18,17 +18,14 @@ case class AccessToken(
 
 object AccessToken {
 
-  def from[P]( endpoints: Endpoints[P] )
-    ( authCode: String, keys: OAuth2Keys, additionalFields: AdditionalFields[P] )
+  def from[P]( providerConfig: P )
+    ( endpoints: Endpoints[P], authCode: String )
     ( implicit requestBuilder: AccessTokenRequestBuilder[P] ) 
     : Task[String\/AccessToken] = {
 
-    val reqTask = requestBuilder.build(
+    val reqTask = requestBuilder.build( providerConfig )(
       endpoints.accessTokenEndpoint,
-      authCode,
-      keys,
-      endpoints.host,
-      additionalFields
+      authCode
     )
     AccessTokenRequest.accessToken( reqTask )
   }

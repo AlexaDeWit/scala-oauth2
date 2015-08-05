@@ -8,15 +8,13 @@ import org.http4s.util._
 
 
 
-class GooglelikeFormat[P] extends ProviderFormat[GoogleCredentials] {
+class GooglelikeFormat[P <: GoogleCredentials] extends ProviderFormat[GoogleCredentials] {
 
   val accessTokenRequestBuilder = new AccessTokenRequestBuilder[P]{
-    override def build(
+    override def build( providerConfig: P )(
       requestUri: Uri,
-      authCode: String,
-      keys: OAuth2Keys,
-      host: String,
-      additionalFields: AdditionalFields[P] ) : Task[Request] = {
+      authCode: String
+    ) : Task[Request] = {
       
       Request(
         Method.POST,
@@ -24,20 +22,26 @@ class GooglelikeFormat[P] extends ProviderFormat[GoogleCredentials] {
         HttpVersion.`HTTP/1.1`
         ).withBody(
           UrlForm(
-            accessTokenRequestMap( authCode, keys ) ++ additionalFields.bodyPart
+            accessTokenRequestMap(
+              authCode,
+              providerConfig.keys,
+              providerConfig.redirectUri
+            )
           )
         )
     }
 
     def accessTokenRequestMap(
       authCode: String,
-      keys: OAuth2Keys
+      keys: OAuth2Keys,
+      redirectUri: Uri
       ) : Map[String,Seq[String]] = {
 
         Map(
           "code" -> Seq(authCode),
           "client_id" -> Seq(keys.clientId),
           "client_secret" -> Seq(keys.secretKey),
+          "redirerect_uri" -> Seq(redirectUri.toString),
           "grant_type" -> Seq("authorization_code")
         )
     }

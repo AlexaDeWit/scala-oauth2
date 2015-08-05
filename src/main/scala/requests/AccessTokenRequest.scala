@@ -13,12 +13,10 @@ import AccessTokenJson._
 
 trait AccessTokenRequestBuilder[P] {
 
-  def build(
+  def build( providerConfig: P )(
     requestUri: Uri,
-    authCode: String,
-    keys: OAuth2Keys,
-    host: String,
-    additionalFields: AdditionalFields[P] ) : Task[Request]
+    authCode: String
+  ) : Task[Request]
 
 }
 
